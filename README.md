@@ -1,6 +1,6 @@
 # INSTITUTO TECNOLOGICO DE NUEVO LAREDO
 
-## Programación Web:computer:
+## Desarrollo API REST:computer:
 
 **Nombre del Alumno:** *Jonathan Alonso Lara*  
 **Numero de control:** *#19100141*  

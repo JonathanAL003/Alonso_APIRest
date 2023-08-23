@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Requests</title>
-    <link rel="stylesheet" href="APIFetch.css">
+    <title>PeticionesJS</title>
+    <link rel="stylesheet" href="PeticionesJs.css">
 </head>
 <body>
     <label for="steamID">Steam ID:</label>
@@ -49,22 +49,6 @@
             estadoContainer.textContent = `Estado: ${data.player.meta.locstatecode}`;
             idContainer.textContent = `ID: ${data.player.meta.steamid}`;
             linkContainer.innerHTML = `<a href="${data.player.meta.profileurl}" target="_blank">Perfil de Steam</a>`;
-        }
-
-        function fetchAndDisplayData(url) {
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    displayData(data.data);
-                })
-                .catch(error => {
-                    console.error('Fetch error:', error);
-                });
         }
 
         document.getElementById("xmlHttpRequestBtn").addEventListener("click", function() {
@@ -152,11 +136,7 @@
                     console.error('Axios error:', error);
                 });
         });
-
-
     </script>
-
-    <!-- Include jQuery and Axios libraries if you haven't already -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Requests</title>
+    <link rel="stylesheet" href="APIFetch.css">
+</head>
+<body>
+    <label for="steamID">Steam ID:</label>
+    <input type="text" id="steamID" placeholder="Enter Steam ID">
+    <button id="xmlHttpRequestBtn">XMLHTTPRequest</button>
+    <button id="fetchPromisesBtn">Fetch Promises</button>
+    <button id="fetchAsyncBtn">Fetch Async/Await</button>
+    <button id="jqueryBtn">jQuery</button>
+    <button id="axiosBtn">Axios</button>
+
+    <div id="avatarContainer"></div>
+    <div id="usernameContainer"></div>
+    <div id="nombreContainer"></div>
+    <div id="paisContainer"></div>
+    <div id="estadoContainer"></div>
+    <div id="idContainer"></div>
+    <div id="linkContainer"></div>
+
+
+    <div>
+        <br><br><br>
+        76561198308052046<br>
+        RENUXA25<br>
+        felipilloto<br>
+        elkevin14<br>
+        76561198398684301
+    </div>
+
+    <script>
+        function displayData(data) {
+            var avatarContainer = document.getElementById("avatarContainer");
+            var usernameContainer = document.getElementById("usernameContainer");
+            var paisContainer = document.getElementById("paisContainer");
+            var estadoContainer = document.getElementById("estadoContainer");
+            var idContainer = document.getElementById("idContainer");
+            var linkContainer = document.getElementById("linkContainer");
+
+            avatarContainer.innerHTML = `<img src="${data.player.avatar}" alt="Avatar" width="100">`;
+            usernameContainer.textContent = `Username: ${data.player.username}`;
+            nombreContainer.textContent = `Nombre: ${data.player.meta.realname}`;
+            paisContainer.textContent = `Pais: ${data.player.meta.loccountrycode}`;
+            estadoContainer.textContent = `Estado: ${data.player.meta.locstatecode}`;
+            idContainer.textContent = `ID: ${data.player.meta.steamid}`;
+            linkContainer.innerHTML = `<a href="${data.player.meta.profileurl}" target="_blank">Perfil de Steam</a>`;
+        }
+
+        function fetchAndDisplayData(url) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displayData(data.data);
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                });
+        }
+
+        document.getElementById("xmlHttpRequestBtn").addEventListener("click", function() {
+            const steamID = document.getElementById("steamID").value;
+            const url = `https://playerdb.co/api/player/steam/${steamID}`;
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    displayData(data.data);
+                    console.log(data.data);
+                    console.log("xmlHttpRequest");
+                }
+            };
+            xhr.send();
+        });
+
+        document.getElementById("fetchPromisesBtn").addEventListener("click", function() {
+            const steamID = document.getElementById("steamID").value;
+            const url = `https://playerdb.co/api/player/steam/${steamID}`;
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displayData(data.data);
+                    console.log(data.data);
+                    console.log("fetchPromises");
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                });
+        });
+
+        document.getElementById("fetchAsyncBtn").addEventListener("click", async function() {
+            const steamID = document.getElementById("steamID").value;
+            const url = `https://playerdb.co/api/player/steam/${steamID}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log(data.data);
+                displayData(data.data);
+                console.log("fetchAsync");
+            } catch (error) {
+                console.error('Fetch error:', error);
+            }
+        });
+
+        document.getElementById("jqueryBtn").addEventListener("click", function() {
+            const steamID = $("#steamID").val();
+            const url = `https://playerdb.co/api/player/steam/${steamID}`;
+
+            $.ajax({
+                url: url,
+                method: "GET",
+                success: function(data) {
+                    console.log(data.data);
+                    displayData(data.data);
+                    console.log("jquery");
+                },
+                error: function(xhr, status, error) {
+                    console.error('jQuery ajax error:', error);
+                }
+            });
+        });
+
+        document.getElementById("axiosBtn").addEventListener("click", function() {
+            const steamID = document.getElementById("steamID").value;
+            const url = `https://playerdb.co/api/player/steam/${steamID}`;
+            axios.get(url)
+                .then(response => {
+                    displayData(response.data.data);
+                    console.log(response.data.data);
+                    console.log("axios");
+                })
+                .catch(error => {
+                    console.error('Axios error:', error);
+                });
+        });
+
+
+    </script>
+
+    <!-- Include jQuery and Axios libraries if you haven't already -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>

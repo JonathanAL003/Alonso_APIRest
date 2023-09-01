@@ -9,7 +9,7 @@
     <button id="Peticion">Peticion </button>
     <script>
         document.getElementById("Peticion").addEventListener("click",()=>{
-            fetch("http://localhost:80")
+            fetch("http://localhost:8080")
                 .then((respuesta)=>respuesta.text())
                     .then(dato => console.log(dato));
         })

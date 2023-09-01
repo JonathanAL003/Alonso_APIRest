@@ -9,9 +9,9 @@ async function generarArchivoExcel() {
     { header: 'Edad', key: 'edad', width: 10 },
   ];
 
-  worksheet.addRow({ nombre: 'Juan', edad: 25 });
-  worksheet.addRow({ nombre: 'María', edad: 30 });
-  worksheet.addRow({ nombre: 'Carlos', edad: 40 });
+  worksheet.addRow({ nombre: 'Jonathan', edad: 21 });
+  worksheet.addRow({ nombre: 'Liliana', edad: 22 });
+  worksheet.addRow({ nombre: 'Fernando', edad: 21 });
 
   await workbook.xlsx.writeFile('archivo.xlsx');
   console.log('Archivo creado exitosamente.');

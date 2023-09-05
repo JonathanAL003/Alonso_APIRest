@@ -1,13 +1,17 @@
 const express = require('express');
 const app = express();
-app.use(express. json());
+// app.use(express. json());
 
-app.get("/alumnos/:carrera", (req, res) => {
-    console.log(req.params);
-    console.log(req.query);
-    console.log(req.body);
-    res.send("Servidor Express contestando peticion GET");
-})
+// app.get("/alumnos/:carrera", (req, res) => {
+//     console.log(req.params);
+//     console.log(req.query);
+//     console.log(req.body);
+//     res.send("Servidor Express contestando peticion GET");
+// })
+
+app.get("/alumnos", (req, res) => {
+    res.json({respuesta : "Servidor Express contestando peticion POST"});
+    })
 
 app.post("/alumnos", (req, res) => {
 res.send("Servidor Express contestando peticion POST");

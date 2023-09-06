@@ -22,7 +22,7 @@ console.log("servidor express escuchando en el puerto 8080");
 })
 
 
-var express = require('express')
+
 var fs = require('fs')
 var morgan = require('morgan')
 var path = require('path')
@@ -36,3 +36,21 @@ app.use(morgan('combined', { stream: accessLogStream }))
 app.get('/', function (req, res) {
   res.send('hello, world!')
 })
+
+
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  database : 'bdweb'
+});
+ 
+connection.connect();
+ 
+connection.query('SELECT * FROM producto', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results[0].solution);
+});
+ 
+connection.end();

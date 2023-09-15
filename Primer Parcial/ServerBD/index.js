@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const mysql = require('mysql2')
-
+app.use(express.json());
+const promisePool = require('./connection.js');
 
 app.get("/alumnos", (req, res) => {
     res.json({respuesta : "Servidor Express contestando peticion POST"});
@@ -19,10 +20,8 @@ var fs = require('fs')
 var morgan = require('morgan')
 var path = require('path')
  
-// create a write stream (in append mode)
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
  
-// setup the logger
 app.use(morgan('combined', { stream: accessLogStream }))
  
 app.get('/', function (req, res) {
@@ -78,3 +77,39 @@ app.delete("/producto/:id", (req, res) => {
         }
     });
   });
+
+    app.post("/producto/new", async (req, res) => {
+        const {Id_Producto,Nombre,Categoria,Descripcion,Precio,Valoracion,Ingredientes,Costo,Minutos} = req.body;
+      try {
+        const result = await promisePool.query(`INSERT INTO producto VALUES ('${Id_Producto}','${Nombre}', '${Categoria}', '${Descripcion}', '${Precio}', '${Valoracion}', '${Ingredientes}', '${Costo}', '${Minutos}')`)
+        res.json(result[0]).status(200);
+      } catch (error) {
+        res.status(500).send(error.message);
+      }
+    });
+
+    app.put("/producto/:id", async (req, res) => {
+        const { id } = req.params;
+        const updateFields = req.body;
+      
+        try {
+          let sql = "UPDATE producto SET ";
+          const values = [];
+          for (const key in updateFields) {
+            if (updateFields.hasOwnProperty(key)) {
+              sql += `${key} = ?, `;
+              values.push(updateFields[key]);
+            }
+          }
+          sql = sql.slice(0, -2);
+          sql += ` WHERE Id_Producto = ?`;
+          values.push(id);
+      
+          const result = await promisePool.query(sql, values);
+          res.json(result[0]).status(200);
+        } catch (error) {
+          res.status(500).send(error.message);
+        }
+      });
+      
+    

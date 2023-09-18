@@ -1,6 +1,8 @@
 const express = require('express');
+const cors = require('cors')
 const app = express();
 const mysql = require('mysql2')
+app.use(cors());
 app.use(express.json());
 const promisePool = require('./connection.js');
 

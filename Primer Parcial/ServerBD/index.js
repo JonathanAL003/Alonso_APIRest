@@ -2,8 +2,14 @@ const express = require('express');
 const cors = require('cors')
 const app = express();
 const mysql = require('mysql2')
+const basicAuth = require('express-basic-auth')
 app.use(cors());
 app.use(express.json());
+
+app.use(basicAuth({
+  users: { 'admin': 'supersecret' }
+}))
+
 const promisePool = require('./connection.js');
 
 app.get("/alumnos", (req, res) => {
@@ -20,7 +26,8 @@ console.log("servidor express escuchando en el puerto 8080");
 
 var fs = require('fs')
 var morgan = require('morgan')
-var path = require('path')
+var path = require('path');
+const expressBasicAuth = require('express-basic-auth');
  
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
  

@@ -165,3 +165,4 @@
 ::1 - - [18/Sep/2023:13:42:07 +0000] "GET /producto HTTP/1.1" 304 - "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
 ::1 - - [18/Sep/2023:13:42:11 +0000] "GET /producto HTTP/1.1" 304 - "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
 ::1 - - [18/Sep/2023:13:42:24 +0000] "GET /producto HTTP/1.1" 304 - "http://127.0.0.1:5500/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - admin [21/Sep/2023:13:42:30 +0000] "GET /producto/ HTTP/1.1" 200 381 "-" "Thunder Client (https://www.thunderclient.com)"

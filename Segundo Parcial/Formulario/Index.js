@@ -24,15 +24,16 @@ app.get('/', (req, res) => {
 
 // Manejador de ruta para procesar el formulario
 app.post("/producto/new", async (req, res) => {
-  const { Id_Producto, Nombre, Categoria, Descripcion, Precio, Valoracion, Ingredientes, Costo, Minutos } = req.body;
 
+  const { Id_Producto, Nombre, Categoria, Descripcion, Precio, Valoracion, Ingredientes, Costo, Minutos } = req.body;
+console.log(req.body)
   try {
     // Realiza la inserción en la base de datos
     const result = await promisePool.query(
-      "INSERT INTO producto (Id_Producto, Nombre, Categoria, Descripcion, Precio, Valoracion, Ingredientes, Costo, Minutos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO producto (Id_Producto,Nombre, Categoria, Descripcion, Precio, Valoracion, Ingredientes, Costo, Minutos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [Id_Producto, Nombre, Categoria, Descripcion, Precio, Valoracion, Ingredientes, Costo, Minutos]
     );
-
+    res.sendFile(__dirname + '/Index.html');
     // Envía una respuesta exitosa
     res.status(200).send('Datos del producto insertados con éxito');
   } catch (error) {

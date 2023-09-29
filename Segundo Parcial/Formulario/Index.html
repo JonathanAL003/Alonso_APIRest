@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Formulario de Producto</h1>
-    <form id="productForm" action="/producto/new" method="POST">
+    <form id="productForm" action="http://localhost:8080/producto/new" method="POST" enctype="application/x-www-form-urlencoded">
         <label for="idProducto">ID del Producto:</label>
         <input type="text" id="idProducto" name="Id_Producto"><br><br>
 
@@ -37,5 +37,15 @@
 
         <input type="submit" value="Enviar">
     </form>
+    <script>
+        document.getElementById("productForm").onsubmit = function(event) {
+            var idProducto = document.getElementById("idProducto").value;
+            if (idProducto.trim() === "") {
+                alert("Por favor, ingrese un ID de Producto.");
+                event.preventDefault(); // Evita que el formulario se envíe si el campo está vacío
+            }
+        };
+    </script>
+    
 </body>
 </html>

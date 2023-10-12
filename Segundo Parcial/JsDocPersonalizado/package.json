@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "docs": "jsdoc -c jsdoc.json"
+  },
+  "devDependencies": {
+    "clean-jsdoc-theme": "^4.2.13",
+    "jsdoc": "^4.0.2",
+    "modern-jsdoc-template": "^1.0.0"
+  }
+}

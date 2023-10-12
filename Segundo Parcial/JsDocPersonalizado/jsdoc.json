@@ -1,0 +1,18 @@
+{
+  "plugins": ["plugins/markdown"],
+  "source": {
+    "include": ["index.js", "tutorial/mi_tutorial.js"], 
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "template": "node_modules/clean-jsdoc-theme",
+    "readme": "README.md",
+    "destination": "./docs/",
+    "recurse": true,
+    "verbose": true
+  },
+  "markdown": {
+    "idInHeadings": true
+  }
+}

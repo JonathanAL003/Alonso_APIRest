@@ -1,9 +1,9 @@
-- nombre: Juan
-  edad: 30
-  ciudad: Buenos Aires
-- nombre: María
-  edad: 28
-  ciudad: Madrid
-- nombre: Ahmed
-  edad: 35
-  ciudad: El Cairo
+- Nombre: Hamburguesa de Carne a la Parilla
+  Precio: 55
+  Ingredientes: Pan,Lechuga,Mayonesa,Tomate,Carne, Queso Americano
+- Nombre: Nugguets de Pollo
+  Precio: 35
+  Ingredientes: Pollo, pan molido
+- Nombre: Hamburguesa doble de carne
+  Precio: 75
+  Ingredientes: Doble carne, pan, lechuga, tomate, mayonsa, carne, queso americano

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obtener Información y Reproducir Álbum de Spotify</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <h1>Obtener Información y Reproducir Álbum de Spotify</h1>
+  <label for="album-link">Enlace del Álbum (URL de Spotify):</label>
+  <input type="text" id="album-link">
+  <button onclick="obtenerInformacionDelAlbum()">Obtener Información</button>
+  <div id="album-info"></div>
+  <div class="iframe-container">
+    <iframe id="spotify-iframe" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+  </div>
+  <script src="metodo.js"></script>
+</body>
+</html>

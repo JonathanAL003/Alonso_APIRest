@@ -1,29 +1,59 @@
-const promisePool = require('../db/connection');
-const productoService = require('../services/productoService');
+const promisePool = require('../connection');
 
-const getAllProducts = (req, res) => {
-  productoService.getAllProducts()
-    .then(results => res.json(results))
-    .catch(error => res.status(500).json({ mensaje: "Error de base de datos" }));
-};
+/**
+ * Obtiene todos los productos de la base de datos.
+ * @returns {Promise} Una promesa que resuelve con la lista de productos.
+ */
+async function getAllProducts() {
+  const [products] = await promisePool.query('SELECT * FROM producto');
+  return [products];
+}
 
-const getProductById = (req, res) => {
-  const productId = req.params.id;
-  productoService.getProductById(productId)
-    .then(results => {
-      if (results.length === 0) {
-        res.status(404).json({ mensaje: "No existe el producto" });
-      } else {
-        res.json(results);
-      }
-    })
-    .catch(error => res.status(500).json({ mensaje: "Error de base de datos" }));
-};
+/**
+ * Obtiene un producto por su ID.
+ * @param {number} productId - ID del producto a obtener.
+ * @returns {Promise} Una promesa que resuelve con el producto correspondiente al ID proporcionado.
+ */
+async function getProductById(productId) {
+  const [product] = await promisePool.query('SELECT * FROM producto WHERE Id_Producto = ?', [productId]);
+  return [product];
+}
 
-// Agrega más controladores aquí
+/**
+ * Crea un nuevo producto en la base de datos.
+ * @param {Object} productData - Datos del nuevo producto.
+ * @returns {Promise} Una promesa que resuelve con el producto creado.
+ */
+async function createProduct(productData) {
+  const result = await promisePool.query('INSERT INTO producto SET ?', [productData]);
+  return [result];
+}
+
+/**
+ * Actualiza un producto por su ID en la base de datos.
+ * @param {number} productId - ID del producto a actualizar.
+ * @param {Object} updateFields - Campos a actualizar en el producto.
+ * @returns {Promise} Una promesa que resuelve con el producto actualizado.
+ */
+async function updateProduct(productId, updateFields) {
+  const [product] = await promisePool.query('UPDATE producto SET ? WHERE Id_Producto = ?', [updateFields, productId]);
+  return [product];
+}
+
+/**
+ * Elimina un producto por su ID de la base de datos.
+ * @param {number} productId - ID del producto a eliminar.
+ * @returns {Promise} Una promesa que resuelve con el resultado de la eliminación.
+ */
+async function deleteProduct(productId) {
+  const result = await promisePool.query('DELETE FROM producto WHERE Id_Producto = ?', [productId]);
+  return [result];
+}
 
 module.exports = {
   getAllProducts,
   getProductById,
-  // Agrega más controladores aquí
+  createProduct,
+  updateProduct,
+  deleteProduct,
 };

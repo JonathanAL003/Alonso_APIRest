@@ -5,7 +5,7 @@ const productoService = require('../services/productoService');
 /**
  * @swagger
  * tags:
- *   name: Productos
+ *   name: default
  *   description: Endpoints relacionados con productos.
  */
 

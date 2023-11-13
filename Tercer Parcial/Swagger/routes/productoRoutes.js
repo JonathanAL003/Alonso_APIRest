@@ -5,7 +5,7 @@ const productoService = require('../services/productoService');
 /**
  * @swagger
  * tags:
- *   name: default
+ *   name: Producto
  *   description: Endpoints relacionados con productos.
  */
 
@@ -15,6 +15,8 @@ const productoService = require('../services/productoService');
 *   get:
 *     summary: Obtiene todos los productos.
 *     description: Obtiene una lista de todos los productos.
+*     tags:
+*       - Producto
 *     responses:
 *       200:
 *         description: Operación exitosa. Devuelve la lista de productos.
@@ -34,6 +36,8 @@ router.get("/producto", async (req, res) => {
 *   get:
 *     summary: Obtiene un producto por su ID.
 *     description: Obtiene un producto según su ID.
+*     tags:
+*       - Producto
 *     parameters:
 *       - in: path
 *         name: id
@@ -67,6 +71,8 @@ router.get("/producto/:id", async (req, res) => {
 *   post:
 *     summary: Crea un nuevo producto.
 *     description: Crea un nuevo producto con los datos proporcionados.
+*     tags:
+*       - Producto
 *     requestBody:
 *       required: true
 *       content:
@@ -114,6 +120,8 @@ router.post("/producto/new", async (req, res) => {
 *   put:
 *     summary: Actualiza un producto por su ID.
 *     description: Actualiza un producto según su ID con los datos proporcionados.
+*     tags:
+*       - Producto
 *     parameters:
 *       - in: path
 *         name: id
@@ -168,6 +176,8 @@ router.put("/producto/:id", async (req, res) => {
 *   delete:
 *     summary: Elimina un producto por su ID.
 *     description: Elimina un producto según su ID.
+*     tags:
+*       - Producto
 *     parameters:
 *       - in: path
 *         name: id

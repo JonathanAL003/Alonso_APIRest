@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const fs =require('fs');
 const cors = require('cors');
 const mysql = require('mysql2');
 const swaggerUI = require('swagger-ui-express');
@@ -11,23 +12,28 @@ const PORT = 8080;
 app.use(cors());
 app.use(express.json());
 
+const def = fs.readFileSync(path.join(__dirname,"./swaggerOptions.json"), {encoding: "utf8", flag:"r"});
+const defObj =JSON.parse(def);
 const swaggerOptions = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'API Productos',
-      version: '1.0.0',
-    },
-  },
-  apis: [
-    `${path.join(__dirname, "./routes/productoRoutes.js")}`,
-  ],
-};
+  definition: defObj,
+  apis : [path.join(__dirname,"./routes/productoRoutes.js")]
+}
+const { SwaggerTheme } = require('swagger-themes');
+const Theme = new SwaggerTheme('v3');
+const option_v1 = {
+  explorer : true,
+  customCss : Theme.getBuffer("dark")
+}
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs, option_v1));
+
 
 app.use('/producto', productoRoutes);
+
+app.use('/api-docs-json', (req,res) => {
+  res.json(swaggerDocs);
+})
 
 app.get('/', (req, res) => {
   res.send('Hello, world!');

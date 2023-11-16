@@ -47,8 +47,8 @@ app.get(
   '/docs',
   redoc({
     title: 'API Docs',
-    specUrl: '/api-docs-json', // Use the correct path for your swagger.json
-    routePrefix: '/docs', // Optional, defaults to '/docs'
+    specUrl: '/api-docs-json', 
+    routePrefix: '/docs',
     options: {
       theme: {
         colors: {
